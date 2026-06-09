@@ -11,19 +11,20 @@ namespace Jellyfin.Plugin.Donate.Api
         [Produces("application/javascript")]
         public IActionResult GetDonateScript()
         {
-            // Отримуємо конфігурацію плагіна
             var config = Plugin.Instance.Configuration;
             
-            // Очищаємо рядок (видаляємо '@', якщо адміністратор його додав)
-            string venmoHandle = config.VenmoString?.Replace("@", "").Trim() ?? "";
+            string donateUrl = config.DonateUrl?.Trim() ?? "";
             
-            // Захист: якщо адмін ще не налаштував Venmo, скрипт залишається порожнім
-            if (string.IsNullOrEmpty(venmoHandle) || venmoHandle == "string") 
+            if (string.IsNullOrEmpty(donateUrl)) 
             {
-                return Content("console.log('Donate Plugin: Venmo is not configured.');", "application/javascript");
+                return Content("console.log('Donate Plugin: URL is not configured.');", "application/javascript");
             }
 
-            // Використовуємо C# Raw String Literals ($$""") для безпечного вбудовування JS та HTML
+            if (!donateUrl.StartsWith("http", System.StringComparison.OrdinalIgnoreCase))
+            {
+                donateUrl = "https://" + donateUrl;
+            }
+
             string scriptContent = $$"""
                 document.addEventListener('viewshow', function(e) {
                     const isHomePage = e.target.classList.contains('homePage');
@@ -34,13 +35,12 @@ namespace Jellyfin.Plugin.Donate.Api
                         const btn = document.createElement('button');
                         btn.id = 'donate-plugin-icon';
                         btn.className = 'paper-icon-button-light headerButton';
-                        btn.title = 'Donate via Venmo';
+                        btn.title = 'Support Server';
                         
-                        // Лапки тут тепер повністю безпечні і не ламають код C#
-                        btn.innerHTML = '<span class="material-icons attach_money" style="color: #008CFF;"></span>';
+                        // Іконка сердечка, яка ідеально підходить для Buy Me A Coffee чи банок
+                        btn.innerHTML = '<span class="material-icons favorite" style="color: #ff5252;"></span>';
                         
-                        // Змінна venmoHandle обгорнута у подвійні фігурні дужки для підстановки
-                        btn.onclick = () => window.open('https://venmo.com/{{venmoHandle}}', '_blank');
+                        btn.onclick = () => window.open('{{donateUrl}}', '_blank');
                         
                         header.prepend(btn);
                     }

@@ -2,15 +2,16 @@
 name: "Donate"
 guid: "b7162d9a-f7a9-453f-a621-40c628213b7c"
 version: "1.0.0.0"
-targetAbi: "10.7.0.0"
-framework: "net5.0"
-overview: "Short description about your plugin"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+overview: "Support your server administrator with a custom donation link."
 description: >
-  This is a longer description that can span more than one
-  line and include details about your plugin.
+  A lightweight plugin for Jellyfin (10.11+) that seamlessly integrates
+  a "Donate" button into the Web UI header, allowing your users to easily
+  support your server via your preferred platform (Monobank, BuyMeACoffee, PayPal, etc.).
 category: "General"
-owner: "jellyfin"
+owner: "lyaschuchenko"
 artifacts:
-- "Jellyfin.Plugin.Donate.dll"
+  - "Jellyfin.Plugin.Donate.dll"
 changelog: >
-  changelog
+  Initial release with UI injection support for Jellyfin 10.11+ and .NET 9.0.
