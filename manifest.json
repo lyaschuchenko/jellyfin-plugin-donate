@@ -1,7 +1,7 @@
 [
   {
     "guid": "b7162d9a-f7a9-453f-a621-40c628213b7c",
-    "name": "Donate",
+    "name": "Jellyfin Donate Plugin",
     "description": "Adds a customizable Donate button to the Jellyfin Web UI.",
     "overview": "Support your server administrator with a custom donation link.",
     "owner": "lyaschuchenko",
@@ -9,7 +9,7 @@
     "imageUrl": "https://raw.githubusercontent.com/lyaschuchenko/jellyfin-plugin-donate/master/icon.png",
     "versions": [
       {
-        "version": "1.0",
+        "version": "1.0.0.0",
         "changelog": "Initial release with UI injection. Compiled for Jellyfin 10.11.x",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/lyaschuchenko/jellyfin-plugin-donate/releases/download/1.0.0.0/Jellyfin.Plugin.Donate.zip",
