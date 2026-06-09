@@ -19,7 +19,7 @@ You can install this plugin directly from the Jellyfin Web UI using the reposito
 4. Enter a name (e.g., `Donate Plugin Repo`).
 5. Paste the following Manifest URL:
    ```text
-   [https://raw.githubusercontent.com/lyaschuchenko/jellyfin-plugin-donate/master/manifest.json](https://raw.githubusercontent.com/lyaschuchenko/jellyfin-plugin-donate/master/manifest.json)
+   https://raw.githubusercontent.com/lyaschuchenko/jellyfin-plugin-donate/master/manifest.json
    ```
 6. Save, go to the **Catalog** tab, find "Donate", and click **Install**.
 7. Restart your Jellyfin server.
