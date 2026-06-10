@@ -12,7 +12,7 @@
         "changelog": "Minor updates and bug fixes.",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/lyaschuchenko/jellyfin-plugin-donate/releases/download/1.0.0.0/Jellyfin.Plugin.Donate.zip",
-        "checksum": "23369C66393FBC82149CD704B7EA8E0E",
+        "checksum": "DFF483F8DC2E75DE46C9B8291F1F8887",
         "timestamp": "2026-06-09T00:00:00Z"     
       }
     ]
