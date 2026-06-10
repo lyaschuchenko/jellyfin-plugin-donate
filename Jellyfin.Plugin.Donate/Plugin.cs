@@ -11,12 +11,6 @@ namespace Jellyfin.Plugin.Donate
 {
     public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     {
-        public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer)
-            : base(applicationPaths, xmlSerializer)
-        {
-            Instance = this;
-        }
-
         private readonly ILogger<Plugin> _logger;
 
         public Plugin(IApplicationPaths applicationPaths, IXmlSerializer xmlSerializer, ILogger<Plugin> logger)
@@ -38,11 +32,10 @@ namespace Jellyfin.Plugin.Donate
             {
                 new PluginPageInfo
                 {
-                    Name = "Donate",
+                    Name = this.Name, 
                     EmbeddedResourcePath = $"{typeof(Plugin).Namespace}.Configuration.configPage.html"
                 }
             };
         }
     }
 }
-

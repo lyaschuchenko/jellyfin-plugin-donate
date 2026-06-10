@@ -1,7 +1,7 @@
 ---
 name: "Donate"
 guid: "b7162d9a-f7a9-453f-a621-40c628213b7c"
-version: "1.0.0.0"
+version: "1.0.1.0"
 targetAbi: "10.11.0.0"
 framework: "net9.0"
 overview: "Support your server administrator with a custom donation link."
@@ -14,4 +14,4 @@ owner: "lyaschuchenko"
 artifacts:
   - "Jellyfin.Plugin.Donate.dll"
 changelog: >
-  Initial release with UI injection support for Jellyfin 10.11+ and .NET 9.0.
+  Minor updates and bug fixes for Jellyfin 10.11+ and .NET 9.0.
