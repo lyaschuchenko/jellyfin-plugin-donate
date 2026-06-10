@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization; // Обов'язково для AllowAnonymous
 using Jellyfin.Plugin.Donate.Configuration;
 
 namespace Jellyfin.Plugin.Donate.Api
 {
     [ApiController]
     [Route("DonatePlugin")]
+    [AllowAnonymous]
     public class DonateController : ControllerBase
     {
         [HttpGet("InjectUI.js")]
@@ -27,18 +29,34 @@ namespace Jellyfin.Plugin.Donate.Api
 
             string scriptContent = $$"""
                 document.addEventListener('viewshow', function(e) {
-                    const isHomePage = e.target.classList.contains('homePage');
-                    if (!isHomePage) return;
+                    if (e.target.classList.contains('loginPage')) return;
 
                     const header = document.querySelector('.headerRight');
-                    if (header && !document.getElementById('donate-plugin-icon')) {
+                    if (header && !document.getElementById('donate-btn')) {
                         const btn = document.createElement('button');
-                        btn.id = 'donate-plugin-icon';
-                        btn.className = 'paper-icon-button-light headerButton';
-                        btn.title = 'Support Server';
+                        btn.id = 'donate-btn';
                         
-                        // Іконка сердечка, яка ідеально підходить для Buy Me A Coffee чи банок
-                        btn.innerHTML = '<span class="material-icons favorite" style="color: #ff5252;"></span>';
+                        btn.style.cssText = 'margin: 0 10px; padding: 0 16px; height: 32px; background: rgba(255, 82, 82, 0.15); color: #ff5252; border: 1px solid rgba(255, 82, 82, 0.3); border-radius: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;';
+                        
+                        const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+                        const isUA = userLang.includes('uk') || userLang.includes('ru');
+                        
+                        const hoverText = isUA ? 'Підтримка' : 'Support';
+                        const tooltipText = isUA ? 'Підтримка серверу' : 'Support Server';
+                        
+                        btn.title = tooltipText;
+                        btn.innerText = 'Donate';
+                        
+                        btn.onmouseover = () => {
+                            btn.style.background = 'rgba(255, 82, 82, 0.3)';
+                            btn.style.borderColor = '#ff5252';
+                            btn.innerText = hoverText;
+                        };
+                        btn.onmouseout = () => {
+                            btn.style.background = 'rgba(255, 82, 82, 0.15)';
+                            btn.style.borderColor = 'rgba(255, 82, 82, 0.3)';
+                            btn.innerText = 'Donate';
+                        };
                         
                         btn.onclick = () => window.open('{{donateUrl}}', '_blank');
                         
