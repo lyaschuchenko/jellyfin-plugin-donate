@@ -58,7 +58,7 @@ If you prefer to compile the plugin yourself:
 
 ## 👏 Credits
 * Original plugin concept and initial backend implementation by [alteredtech](https://github.com/alteredtech/jellyfin-plugin-donate).
-* Updated to .NET 9 and completely refactored for universal donation platform support, smart frontend localization, and UI DOM injection by Mykhailo Liashchuk.
+* Updated to .NET 9 and completely refactored for universal donation platform support, smart frontend localization, and UI DOM injection by @lyaschuchenko.
 
 ---
 *Note: This project is independent and not officially affiliated with the core Jellyfin Project.*
